@@ -118,8 +118,8 @@ resource "google_managed_kafka_connector" "default" {
     "topics"               = ".*" # Replicate all topics from the source
     # The value for bootstrap.servers is a comma-separated list of hostname:port pairs
     # for one or more Kafka brokers in the source/target cluster.
-    "source.cluster.bootstrap.servers" = "source_cluster_dns"
-    "target.cluster.bootstrap.servers" = "target_cluster_dns"
+    "source.cluster.bootstrap.servers" = "bootstrap.${google_managed_kafka_cluster.source.cluster_id}.${google_managed_kafka_cluster.source.location}.managedkafka.${data.google_project.default.project_id}.cloud.goog:9092"
+    "target.cluster.bootstrap.servers" = "bootstrap.${google_managed_kafka_cluster.target.cluster_id}.${google_managed_kafka_cluster.target.location}.managedkafka.${data.google_project.default.project_id}.cloud.goog:9092"
     # You can define an exclusion policy for topics as follows:
     # To exclude internal MirrorMaker 2 topics, internal topics and replicated topics,.
     "topics.exclude" = "mm2.*\\.internal,.*\\.replica,__.*"

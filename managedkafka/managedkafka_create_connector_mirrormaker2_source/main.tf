@@ -76,7 +76,7 @@ resource "google_managed_kafka_connect_cluster" "default" {
         # "GMK_CLUSTER_ID.REGION.managedkafka.PROJECT_ID.cloud.goog.*"
         # Please note that we do NOT need to add the DNS name of the primary Kafka cluster to the
         # `dns_domain_names` list, as our Connect cluster configures that automatically.
-        dns_domain_names = ["DNS_DOMAIN_NAME"]
+        dns_domain_names = ["${google_managed_kafka_cluster.source.cluster_id}.${google_managed_kafka_cluster.source.location}.managedkafka.${data.google_project.default.project_id}.cloud.goog."]
       }
     }
   }
